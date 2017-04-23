@@ -2,16 +2,20 @@ function gap(g, m, n){
   let result = [];
 
   for (var i = m; i + g < n; i++) {
-    if (prime(i) && prime(i + g)) {
-      for (var j = i + 1; j < g; j++) {
-        if (prime(j)) {
-          next;
-        }
-      }
+    if (prime(i) && prime(i + g) && between(i, i + g)) {
       return [i, i + g];
     }
   }
   return null;
+}
+
+function between(start, end){
+  for (var i = start + 1; i < end; i++) {
+    if (prime(i)) {
+      return false;
+    }
+  }
+  return true;
 }
 
 function prime(num){
@@ -33,13 +37,16 @@ function prime(num){
   return true;
 }
 
-let test = gap(2, 100, 110);
-let test1 = gap(4, 100, 110);
-let test2 = gap(6, 100, 110);
-let test3 = gap(8, 300, 400);
-let test4 = gap(10, 300, 400);
+let test = between(3, 7);
 console.log(test);
-console.log(test1);
-console.log(test2);
-console.log(test3);
-console.log(test4);
+
+// let test = gap(2, 100, 110);
+// let test1 = gap(4, 100, 110);
+// let test2 = gap(6, 100, 110);
+// let test3 = gap(8, 300, 400);
+// let test4 = gap(10, 300, 400);
+// console.log(test);
+// console.log(test1);
+// console.log(test2);
+// console.log(test3);
+// console.log(test4);
