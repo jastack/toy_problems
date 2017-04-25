@@ -1,0 +1,15 @@
+<h2>This is my approach to the problem:</h2>
+
+<p>Before getting into my explanation for my approach to Part 1, I want to explain how I generated the random task locations to 1) make sure this is a valid method and 2) set up my explanation for Part 2.</p>
+<p>I first built a 1,000,000 X 1,000,000 grid and divided it into equally sized columns based on how many drivers there are. Then I iterated through each driver (column) and added random points to that driver's task list until each driver had the same number of tasks (25). Each task location had to fulfill the following conditions: the x value must be within the range covered by the driver, and there could not be any duplicate points.
+</p>
+
+<img src="http://res.cloudinary.com/dopv3qpj7/image/upload/c_scale,w_309/v1493151827/diagram_sb2yvu.png" alt="">
+
+<p>I then sorted each driver's tasks by y-value to produce a relatively optimized path for the driver to follow. I realize this is definitely not always the most optimized path (and in real life the tasks could be distributed to drivers in a better way, perhaps by clustering) </p>
+
+<img width="300" height="auto" src="http://res.cloudinary.com/dopv3qpj7/image/upload/v1493151716/paths_h0lskp.png" alt="">
+
+<p>The naive solution, then, to inserting an additional point would be to iterate through every possible point, check how much of a difference it makes to the length of the path, and return the one that makes the smallest difference</p>
+<p>A faster way, which may not always be the optimized solution but will likely be the optimized solution, is to figure out which driver should take the additional point and only check that driver's tasks to see where the new task should be inserted. The way I set up tasks makes it easy to figure out which driver should take a new one -- divide the x value of the new point by the column width and round down, and the resulting number is the driver number. (i.e. if there are 10 drivers in a 100 X 100 grid and the point is (65, 90), the interval would be 10 -- 65 / 10 = 6.5, rounded down is 6, so driver number 6 should take this task). </p>
+<p>This way the task can be inserted in constant time. It will always have to iterate through the 25 tasks, but it doesn't matter how many drivers there are. I can imagine a further optimization based on the fact that the tasks are ordered -- a binary search could determine where the new point would fit in the path (again, the might not be absolutely optimizized, but generally might be).</p>
