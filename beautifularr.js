@@ -1,28 +1,28 @@
 
-function countArrangement(N){
-  if (N < 1){
-    return null;
-  }
-
-  if (N === 1) {
-    return 1;
-  }
-
-  let result = 1;
-  for (var i = 1; i <= N; i++) {
-    let indexTotal = 0;
-    for (var j = 1; j <= N; j++) {
-      if (j % i === 0){
-        indexTotal += 1;
-      }
+var countArrangement = function(N) {
+    var c = 0;
+    var s = [];
+    function helper(index) {
+        if (index === N + 1){
+           c += 1;
+           return c;
+        }
+        for (var i = 0; i < N; i++) {
+            if (!s[i] && (index % (i + 1) === 0 || (i + 1) % index === 0)) {
+                s[i] = true;
+                helper(index + 1);
+                s[i] = false;
+            }
+        }
     }
-    result *= indexTotal;
-  }
 
-  return result;
-}
+    helper(1);
+    return c;
+};
 
-let test = countArrangement(2);
+
+
+let test = countArrangement(3);
 console.log(test);
 
 // Example: Input 2 give two:
