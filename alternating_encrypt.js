@@ -1,5 +1,11 @@
 function encrypt(text, n) {
-
+  let final = text;
+  let i = 0;
+  while (i < n){
+    final = pass(final);
+    i += 1;
+  }
+  return final;
 }
 
 function pass(text){
@@ -27,19 +33,26 @@ function decryptPass(text){
     result.push(second.shift());
   }
 
-  result.concat(first);
-  result.concat(second);
+  result = result.concat(first);
+  result = result.concat(second);
 
   return result.join("");
 
 }
 
 function decrypt(encryptedText, n) {
+  let final = encryptedText;
+  let i = 0;
+  while (i < n){
+    final = decryptPass(final);
+    i += 1;
+  }
 
+  return final;
 }
 
 let text = "This is a test!";
-let test = pass(text);
-let de = decryptPass(test);
+let test = encrypt(text, 4);
+let de = decrypt(test, 4);
 console.log(test);
 console.log(de);
