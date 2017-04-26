@@ -1,4 +1,12 @@
 function encrypt(text, n) {
+  if (text === null || text.length ===0){
+    return text;
+  }
+
+  if (n <= 0){
+    return text;
+  }
+
   let final = text;
   let i = 0;
   while (i < n){
@@ -41,6 +49,15 @@ function decryptPass(text){
 }
 
 function decrypt(encryptedText, n) {
+  if (encryptedText === null || encryptedText.length ===0){
+    return encryptedText;
+  }
+
+  if (n <= 0){
+    return encryptedText;
+  }
+
+
   let final = encryptedText;
   let i = 0;
   while (i < n){
