@@ -20,9 +20,24 @@ var countArrangement = function(N) {
     return c;
 };
 
+function testing(n){
+  var c = 0;
+
+  function factorial(index){
+    if (index === 1){
+      return 1;
+    } else {
+      return index * factorial(index - 1);
+    }
+  }
+
+  return factorial(n);
+}
 
 
-let test = countArrangement(3);
+
+
+let test = testing(7);
 console.log(test);
 
 // Example: Input 2 give two:
