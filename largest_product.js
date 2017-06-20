@@ -58,19 +58,20 @@ function leftDiagonal(grid, num){
   return product;
 }
 
-function leftDiagonal(grid, num){
+function rightDiagonal(grid, num){
   let product = null
   let rows = grid.length;
   let columns = grid[0].length;
   let horizontalBound = columns - num + 1
   let verticalBound = rows - num + 1
   for (var i = 0; i < verticalBound; i++) {
-    for (var j = 0; j < horizontalBound; j++) {
+    for (var j = columns - 1; j > num; j--) {
       let arr = []
       for (var k = 0; k < num; k++) {
-        arr.push(grid[i + k][j + k])
+        arr.push(grid[i + k][j - k])
       }
       let testProduct = arr.reduce(function(a,b){return a*b;});
+      console.log("here");
       if (product === null || testProduct > product) {
         product = testProduct
       }
@@ -84,3 +85,6 @@ console.log(max);
 
 let test = leftDiagonal(grid, 4);
 console.log(test);
+
+let test2 = rightDiagonal(grid, 4);
+console.log(test2);
