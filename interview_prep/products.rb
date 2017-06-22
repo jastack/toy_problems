@@ -103,3 +103,8 @@ arr3 = [0, 4, 5, 10]
 p get_products(arr1) == [84, 12, 28, 21]
 p get_products(arr2) == [3780, 540, 1260, 945, 756, 420]
 p get_products(arr3) == [200, 0, 0, 0]
+
+# Ok this works, an is essentially O(n), but it could be cleaner and a little
+# bit more effecient. Instead of creating two arrays, (front and back)
+# I want to just create one, and then add to it by walking backwards through
+# the original array
