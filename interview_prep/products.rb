@@ -108,4 +108,49 @@ p get_products(arr3) == [200, 0, 0, 0]
 # bit more effecient. Instead of creating two arrays, (front and back)
 # I want to just create one, and then add to it by walking backwards through
 # the original array
-# first
+#
+# Pseudocode:
+#
+# function(arr)
+#  create product_array, size of arr
+#  create variable product, set equal to 1
+#
+#  iterate through array, starting on index = 0, and on each pass:
+#   set product_array[index] = product
+#   set product = product * arr[index]
+#
+#  reset product to 1
+#  starting on the last element, iterate down through array, and on each pass:
+#    set product_array[index] *= product
+#    set product = product * arr[index]
+#
+#   return product_array
+def get_products_improved(arr)
+  product_array = Array.new(arr.length)
+  product = 1
+
+  i = 0
+  while i < arr.length
+    product_array[i] = product
+    product *= arr[i]
+    i += 1
+  end
+
+  product = 1
+  i = arr.length - 1
+  while i >= 0
+    product_array[i] *= product
+    product *= arr[i]
+    i -= 1
+  end
+
+  product_array
+
+end
+
+arr1 = [1, 7, 3, 4]
+arr2 = [1, 7, 3, 4, 5, 9]
+arr3 = [0, 4, 5, 10]
+p get_products_improved(arr1) == [84, 12, 28, 21]
+p get_products_improved(arr2) == [3780, 540, 1260, 945, 756, 420]
+p get_products_improved(arr3) == [200, 0, 0, 0]
