@@ -51,7 +51,7 @@ def get_different_number(arr)
     i += 1
   end
 
-  if arr.length == 2^31 -1
+  if arr.length == 2**31 - 1
     return undefined
   else
     return arr.length
