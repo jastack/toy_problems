@@ -35,20 +35,20 @@
 //   else if array[check] < check
 //     start = check + 1
 //   else if array[check] > check
-//     end = check
+//     end = check - 1
 //   If doesn't find, return -1
 //
 function indexEqualsValueSearch(arr){
   var start = 0;
   var end = arr.length - 1;
-  while (start < end){
+  while (start <= end){
     var check = Math.floor((start + end) / 2);
     if (arr[check] === check) {
       return check;
     } else if (arr[check] < check) {
       start = check + 1;
     } else if (arr[check] > check) {
-      end = check;
+      end = check - 1;
     }
   }
 
@@ -58,6 +58,8 @@ function indexEqualsValueSearch(arr){
 const arr1 = [-8,0,2,5];
 const arr2 = [-1,0,3,6];
 const arr3 = [-1, 0, 1, 2, 3, 4, 5, 7, 9];
+const arr4 = [0, 2, 3, 4, 6, 7, 8, 9, 10];
 console.log(indexEqualsValueSearch(arr1) === 2);
 console.log(indexEqualsValueSearch(arr2) === -1);
 console.log(indexEqualsValueSearch(arr3) === 7);
+console.log(indexEqualsValueSearch(arr4));
