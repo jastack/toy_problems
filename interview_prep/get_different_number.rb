@@ -65,3 +65,39 @@ arr3 = [6, 3, 9, 0]
 p get_different_number(arr1) == 4
 p get_different_number(arr2) == 1
 p get_different_number(arr3) == 1
+
+# This question had a quasi - bonus part: the in-place solution
+#
+# Pseudocode:
+#  function get_different_number(arr) => [0, 3, 2, 3]
+#                                               ^
+#   set variable n equal to arr length => n = 4
+#   set variable temp equal to zero => temp = 0
+#  set variable i equal to zero => i = 0
+#  while i less than n => i = 2
+#   set temp equal to arr at i => temp = 2
+#   while temp less than n and arr at temp does not equal temp
+#    swap temp and arr at temp
+#   now increment i again from zero and check if in array
+#
+require 'byebug'
+def get_different_number_in_place(arr)
+  n = arr.length
+  temp = 0
+
+  index = 0
+
+  while index < n
+    temp = arr[index]
+    while (temp < n) && (arr[temp] != temp)
+      temp, arr[temp] = arr[temp], temp
+      p arr
+    end
+    index += 1
+  end
+  arr
+
+end
+
+arr4 = [0, 2, 3, 4]
+p get_different_number_in_place(arr4)
