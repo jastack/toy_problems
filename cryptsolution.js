@@ -29,11 +29,6 @@ function isCryptSolution(crypt, solution) {
         return false;
     }
 
-    console.log(firstCrypt);
-    console.log(secondCrypt);
-    console.log(thirdCrypt);
-
-
     if (parseInt(firstCrypt) + parseInt(secondCrypt) === parseInt(thirdCrypt)){
         return true;
     } else {
