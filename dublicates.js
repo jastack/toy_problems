@@ -10,7 +10,6 @@ function rotateImage(a) {
     result.push(row);
   }
 
-  console.log(result);
   return result;
 }
 
