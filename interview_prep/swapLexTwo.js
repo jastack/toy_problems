@@ -94,7 +94,7 @@ function findConnected(graph){
 }
 
 
-function swapLexTwo(str,pairs){
+function swapLexOrder(str,pairs){
   let stringArr = str.split("");
   let pairsGraph = buildGraph(pairs);
   let connected = findConnected(pairsGraph);
