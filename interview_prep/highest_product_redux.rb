@@ -81,7 +81,7 @@ def highest_product(arr)
 
 end
 
-arr_one = [-10, -2, 3, 4, 5]
+arr_one = [1, 10, -5, 1, -100]
 #                      ^
 # max_two = 1*2 => 3*2 => 4*3
 # min_two = 1*2
