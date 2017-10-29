@@ -27,10 +27,7 @@ function primeArr(num){
   return result;
 }
 
-function kPowerFree(num, k){
-  let boundSet = Math.log(num) / k;
-  let bound = Math.floor(Math.exp(boundSet));
-  let primes = primeArr(bound).map(el => Math.pow(el, k));
+function kPowerFree(num, k, primes){
   for (let i = 0; i < primes.length; i++){
     if (num % primes[i] === 0){
       return false;
@@ -42,12 +39,17 @@ function kPowerFree(num, k){
 
 function processData(input){
   let counter = 0;
-  for (let i = 1; i <= input[0]; i++){
-    if (kPowerFree(i, input[1])){
+  let max = input[0];
+  let k = input[1];
+  let boundSet = Math.log(max) / k;
+  let bound = Math.floor(Math.exp(boundSet));
+  let primes = primeArr(bound).map(el => Math.pow(el, k));
+  for (let i = 1; i <= max; i++){
+    if (kPowerFree(i, k, primes)){
       counter += 1;
     }
   }
   return counter;
 }
 
-console.log(processData([10,3]));
+console.log(processData([10,2]));

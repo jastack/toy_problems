@@ -33,7 +33,7 @@ let nodeSeven = new Node(3);
 
 nodeOne.left = nodeTwo;
 nodeOne.right = nodeThree;
-// nodeTwo.left = nodeFour;
+nodeTwo.left = nodeFour;
 nodeTwo.right = nodeFive;
 nodeThree.left = nodeSix;
 nodeThree.right = nodeSeven;
@@ -65,7 +65,7 @@ function checkSymmetric(arr){
   let end = arr.length - 1;
   let i = 0;
   while (start < end){
-    if (arr[start] !== arr[end]){
+    if (arr[start].value !== arr[end].value){
       return false;
     } else {
       i += 1;
@@ -77,37 +77,40 @@ function checkSymmetric(arr){
   return true;
 }
 
-console.log(checkSymmetric([1,null,2,1]));
+console.log(checkSymmetric([1,2,2,1]));
 
-function isTreeSymmetric(tree){
-  let queue = [tree];
-  // console.log(queue);
-  let i = 0;
-  let level = 0;
-  let levelPointer = 0;
-  while (queue[i]){
-    let currentNode = queue[i];
-    queue.push(currentNode.left);
-    queue.push(currentNode.right);
-    if (i === Math.pow(2, level)){
-      // console.log(queue.slice(levelPointer));
-      level += 1;
-      levelPointer += Math.pow(2, level);
+function isTreeSymmetric(t) {
+    let queue = [t];
+    let i = 0;
+    let start = 1;
+    let end = 2;
+    while (queue[i]){
+        if (i === end){
+            //do check from start to end
+            if (checkSymmetric(queue.slice(start, end + 1))){
+              start = 2 * start + 1;
+              end = 2 * end + 2;
+            } else {
+              return false;
+            }
+        }
+
+        let current = queue[i];
+        if (current.left){
+            queue.push(current.left);
+            if (current.right){
+                queue.push(current.right);
+            } else {
+            return false;
+          }
+        }
+
+        i += 1;
 
     }
 
-    i++;
-  }
+    return true;
 
-  function readTree(arr){
-    return arr.map(el => {
-      if (el){
-        return el.val;
-      }
-    });
-  }
-
-  return readTree(queue);
 }
 
 console.log(isTreeSymmetric(nodeOne));
