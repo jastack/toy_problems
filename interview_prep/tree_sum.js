@@ -40,6 +40,12 @@ nodeThree.right = nodeSeven;
 
 // console.log(nodeOne);
 
+/*
+       1
+      2 2
+    3  4 4 3
+*/
+
 function pathSum(tree, sum){
   function search(node, currentSum){
     let current = currentSum + node.val;
@@ -63,12 +69,10 @@ function pathSum(tree, sum){
 function checkSymmetric(arr){
   let start = 0;
   let end = arr.length - 1;
-  let i = 0;
   while (start < end){
-    if (arr[start].value !== arr[end].value){
+    if (arr[start] !== arr[end]){
       return false;
     } else {
-      i += 1;
       start += 1;
       end -= 1;
     }
@@ -77,38 +81,35 @@ function checkSymmetric(arr){
   return true;
 }
 
-console.log(checkSymmetric([1,2,2,1]));
+console.log(checkSymmetric([]));
 
 function isTreeSymmetric(t) {
     let queue = [t];
-    let i = 0;
-    let start = 1;
-    let end = 2;
-    while (queue[i]){
-        if (i === end){
-            //do check from start to end
-            if (checkSymmetric(queue.slice(start, end + 1))){
-              start = 2 * start + 1;
-              end = 2 * end + 2;
-            } else {
-              return false;
-            }
-        }
+    let vals = [t.val];
+    while (queue.length > 0){
+      let current = queue.shift();
 
-        let current = queue[i];
-        if (current.left){
-            queue.push(current.left);
-            if (current.right){
-                queue.push(current.right);
-            } else {
-            return false;
-          }
-        }
+      if (current.left){
+        queue.push(current.left);
+        vals.push(current.left.val);
+      }
 
-        i += 1;
-
+      if (current.right){
+        queue.push(current.right);
+        vals.push(current.right.val);
+      }
     }
 
+    for (let i = 0; Math.pow(2, i) < vals.length; i++){
+      let start = Math.pow(2, i) - 1;
+      let endIdx = start * 2;
+
+      let sliced = vals.slice(start, endIdx + 1);
+      if (!checkSymmetric(sliced)){
+        return false;
+      }
+
+    }
     return true;
 
 }

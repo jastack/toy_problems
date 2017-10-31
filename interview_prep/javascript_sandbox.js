@@ -1,8 +1,8 @@
 class Node {
   constructor(val){
     this.value = val;
-    this.left_node = null;
-    this.right_node = null;
+    this.left = null;
+    this.right = null;
   }
 }
 
@@ -21,7 +21,7 @@ class Tree {
       let next = stack.pop();
       let current = next[0];
       let depth = next[1];
-      if (!current.left_node && !current.right_node){
+      if (!current.left && !current.right){
         if (!depthSet.has(current[1])){
           depthSet.add(depth);
           depthArr.push(depth);
@@ -33,12 +33,12 @@ class Tree {
 
 
       } else {
-        if (current.left_node){
-          stack.push([current.left_node, depth + 1 ]);
+        if (current.left){
+          stack.push([current.left, depth + 1 ]);
         }
 
-        if (current.right_node){
-          stack.push([current.right_node, depth + 1]);
+        if (current.right){
+          stack.push([current.right, depth + 1]);
         }
       }
 
@@ -66,13 +66,151 @@ const nodeFour = new Node(2);
 const nodeFive = new Node(5);
 const nodeSix = new Node(4);
 const nodeSeven = new Node(9);
-root.left_node = nodeOne;
-root.right_node = nodeThree;
-nodeOne.left_node = nodeFour;
-nodeFour.right_node = nodeFive;
-nodeFive.left_node = nodeSix;
-nodeThree.left_node = nodeSeven;
+root.left = nodeOne;
+root.right = nodeThree;
+nodeOne.left = nodeFour;
+nodeFour.right = nodeFive;
+nodeFive.left = nodeSix;
+nodeThree.left = nodeSeven;
 const tree = new Tree(root);
 //
 
 console.log(tree.superbalanced());
+
+
+const newTree = {
+    "value": -191,
+    "left": {
+        "value": 374,
+        "left": {
+            "value": -361,
+            "left": {
+                "value": -771,
+                "left": null,
+                "right": {
+                    "value": -379,
+                    "left": {
+                        "value": -154,
+                        "left": null,
+                        "right": null
+                    },
+                    "right": {
+                        "value": -699,
+                        "left": null,
+                        "right": null
+                    }
+                }
+            },
+            "right": {
+                "value": 159,
+                "left": {
+                    "value": -900,
+                    "left": {
+                        "value": 305,
+                        "left": null,
+                        "right": null
+                    },
+                    "right": {
+                        "value": -486,
+                        "left": null,
+                        "right": null
+                    }
+                },
+                "right": {
+                    "value": 200,
+                    "left": {
+                        "value": -699,
+                        "left": null,
+                        "right": null
+                    },
+                    "right": {
+                        "value": 470,
+                        "left": null,
+                        "right": null
+                    }
+                }
+            }
+        },
+        "right": null
+    },
+    "right": {
+        "value": 374,
+        "left": null,
+        "right": {
+            "value": -361,
+            "left": {
+                "value": 159,
+                "left": {
+                    "value": 200,
+                    "left": {
+                        "value": 470,
+                        "left": null,
+                        "right": null
+                    },
+                    "right": {
+                        "value": -699,
+                        "left": null,
+                        "right": null
+                    }
+                },
+                "right": {
+                    "value": -900,
+                    "left": {
+                        "value": -486,
+                        "left": null,
+                        "right": null
+                    },
+                    "right": {
+                        "value": 305,
+                        "left": null,
+                        "right": null
+                    }
+                }
+            },
+            "right": {
+                "value": -771,
+                "left": {
+                    "value": -379,
+                    "left": {
+                        "value": -699,
+                        "left": null,
+                        "right": null
+                    },
+                    "right": {
+                        "value": -154,
+                        "left": null,
+                        "right": null
+                    }
+                },
+                "right": null
+            }
+        }
+    }
+};
+
+/*             -191
+          374      374
+      -361  -361 -771 159
+
+*/
+
+function treeReader(node){
+  let result = [];
+  let queue = [node];
+
+  while (queue.length > 0){
+    let current = queue.shift();
+    result.push(current.value);
+    if (current.left){
+      queue.push(current.left);
+    }
+
+    if (current.right){
+      queue.push(current.right);
+    }
+  }
+
+  return result;
+}
+
+console.log(treeReader(tree.root));
